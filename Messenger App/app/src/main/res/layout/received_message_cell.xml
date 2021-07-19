@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvReceivedMessageCellMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/received_message_background"
+        android:padding="16dp"
+        android:textColor="@color/dark_gray"
+        android:textSize="@dimen/message_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.7"
+        tools:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvReceivedMessageCellTime"
+        style="@style/Theme.MessengerApp.TimeCodeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tvReceivedMessageCellMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvReceivedMessageCellMessage"
+        app:layout_constraintTop_toTopOf="@+id/tvReceivedMessageCellMessage"
+        tools:hint="TextView" />
+</androidx.constraintlayout.widget.ConstraintLayout>
