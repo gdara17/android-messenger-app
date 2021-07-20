@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsFragment" >
+
+    <Button
+        android:id="@+id/btSettingsUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:text="@string/button_update"
+        app:layout_constraintEnd_toEndOf="@+id/etSettingsPassword"
+        app:layout_constraintStart_toStartOf="@+id/etSettingsPassword"
+        app:layout_constraintTop_toBottomOf="@+id/etSettingsPassword" />
+
+    <EditText
+        android:id="@+id/etSettingsNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/textview_background"
+        android:ems="12"
+        android:hint="@string/hint_nickname"
+        android:inputType="textPersonName"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/textview_text"
+        app:layout_constraintEnd_toEndOf="@+id/imgSettingsAvatar"
+        app:layout_constraintStart_toStartOf="@+id/imgSettingsAvatar"
+        app:layout_constraintTop_toBottomOf="@+id/imgSettingsAvatar" />
+
+    <EditText
+        android:id="@+id/etSettingsPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/textview_background"
+        android:ems="12"
+        android:hint="@string/hint_password"
+        android:inputType="textPassword"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/textview_text"
+        app:layout_constraintEnd_toEndOf="@+id/etSettingsNickname"
+        app:layout_constraintStart_toStartOf="@+id/etSettingsNickname"
+        app:layout_constraintTop_toBottomOf="@+id/etSettingsNickname" />
+
+    <ImageView
+        android:id="@+id/imgSettingsAvatar"
+        android:layout_width="@dimen/login_avatar"
+        android:layout_height="@dimen/login_avatar"
+        android:src="@drawable/avatar_image_placeholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btSettingsSignOut"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/button_sign_out"
+        android:textColor="@color/dark_gray"
+        app:layout_constraintEnd_toEndOf="@+id/btSettingsUpdate"
+        app:layout_constraintStart_toStartOf="@+id/btSettingsUpdate"
+        app:layout_constraintTop_toBottomOf="@+id/btSettingsUpdate"
+        app:strokeColor="@color/dark_gray" />
+</androidx.constraintlayout.widget.ConstraintLayout>

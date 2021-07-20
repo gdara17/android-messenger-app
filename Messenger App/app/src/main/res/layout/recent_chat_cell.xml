@@ -10,7 +10,7 @@
         android:layout_width="@dimen/recent_chat_avatar"
         android:layout_height="@dimen/recent_chat_avatar"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/avatar_image_placeholder" />
