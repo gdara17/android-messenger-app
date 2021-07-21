@@ -1,4 +1,4 @@
-package ge.gdara17.messengerapp.recentchats
+package ge.gdara17.messengerapp.main.recentchats
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

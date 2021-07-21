@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import ge.gdara17.messengerapp.R
 import ge.gdara17.messengerapp.dataclasses.Message
 
-class MessagesAdapter(private val messages: MutableList<Message>) : RecyclerView.Adapter<MessagesAdapter.MessageCellViewHolder>() {
+class MessagesAdapter() : RecyclerView.Adapter<MessagesAdapter.MessageCellViewHolder>() {
+    private lateinit var messages: MutableList<Message>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageCellViewHolder {
         return if (viewType == SENT_MESSAGE) {
@@ -34,12 +35,17 @@ class MessagesAdapter(private val messages: MutableList<Message>) : RecyclerView
         return if (messages[position].received!!) RECEIVED_MESSAGE else SENT_MESSAGE
     }
 
-    abstract class MessageCellViewHolder(private val itemView: View) :
+    fun submitList(messages: MutableList<Message>) {
+        this.messages = messages
+        notifyDataSetChanged()
+    }
+
+    abstract class MessageCellViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         abstract fun configure(message: Message)
     }
 
-    class SentMessageCellViewHolder(private val itemView: View) : MessageCellViewHolder(itemView) {
+    class SentMessageCellViewHolder(itemView: View) : MessageCellViewHolder(itemView) {
         override fun configure(message: Message) {
             val tvMessageText = itemView.findViewById<TextView>(R.id.tvSentMessageCellMessage)
             val tvMessageTime = itemView.findViewById<TextView>(R.id.tvSentMessageCellTime)
@@ -49,7 +55,7 @@ class MessagesAdapter(private val messages: MutableList<Message>) : RecyclerView
         }
     }
 
-    class ReceivedMessageCellViewHolder(private val itemView: View) :
+    class ReceivedMessageCellViewHolder(itemView: View) :
         MessageCellViewHolder(itemView) {
         override fun configure(message: Message) {
             val tvMessageText = itemView.findViewById<TextView>(R.id.tvReceivedMessageCellMessage)

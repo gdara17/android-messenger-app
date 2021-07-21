@@ -1,10 +1,11 @@
-package ge.gdara17.messengerapp
+package ge.gdara17.messengerapp.main.settings
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import ge.gdara17.messengerapp.R
 
 class SettingsFragment : Fragment() {
 

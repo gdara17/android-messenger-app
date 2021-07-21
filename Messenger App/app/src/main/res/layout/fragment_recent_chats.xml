@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".recentchats.RecentChatsFragment">
+    tools:context=".main.recentchats.RecentChatsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRecentChats"
