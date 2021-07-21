@@ -1,5 +1,6 @@
 package ge.gdara17.messengerapp.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import ge.gdara17.messengerapp.main.settings.SettingsFragment
 import ge.gdara17.messengerapp.chat.ChatActivity
 import ge.gdara17.messengerapp.contacts.ContactsActivity
 import ge.gdara17.messengerapp.databinding.ActivityMainBinding
+import ge.gdara17.messengerapp.dataclasses.User
 import ge.gdara17.messengerapp.main.recentchats.RecentChatsFragment
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +31,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -37,9 +38,6 @@ class MainActivity : AppCompatActivity() {
 
         initNavigationView()
         setClickListeners()
-//        val database = Firebase.database
-//        val myRef = database.getReference("message")
-//        myRef.setValue("Hello World!")
     }
 
     private fun initNavigationView() {
@@ -56,4 +54,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(i)
         }
     }
+
 }

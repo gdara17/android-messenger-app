@@ -7,12 +7,12 @@
     tools:context=".login.SignUpActivity">
 
     <Button
-        android:id="@+id/btSignUpSignUp"
+        android:id="@+id/btnSignUpSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:backgroundTint="?attr/colorPrimary"
-        android:text="@string/button_sign_in"
+        android:text="@string/button_sign_up"
         app:layout_constraintEnd_toEndOf="@+id/etSignUpPassword"
         app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="@+id/etSignUpPassword"

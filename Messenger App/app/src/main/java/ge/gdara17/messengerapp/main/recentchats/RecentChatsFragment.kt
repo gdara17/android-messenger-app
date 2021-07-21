@@ -25,7 +25,7 @@ class RecentChatsFragment : Fragment(), RecentChatClickListener, RecentChatsCont
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRecentChatsBinding.inflate(inflater, container, false)
         val view = binding.root
 

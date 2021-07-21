@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @IgnoreExtraProperties
 @Parcelize
 data class User(
-    val name: String? = null,
-    val occupation: String? = null,
+    var name: String? = null,
+    var occupation: String? = null,
 //    val avatar: Image,
 ) : Parcelable

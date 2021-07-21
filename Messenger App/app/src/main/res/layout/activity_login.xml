@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.LoginActivity">
+    tools:context=".login.LogInActivity">
 
     <Button
-        android:id="@+id/btLoginSignIn"
+        android:id="@+id/btnLoginSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -69,12 +69,12 @@
         android:layout_marginBottom="8dp"
         android:text="@string/tv_not_registered"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/btLoginSignUp"
-        app:layout_constraintEnd_toEndOf="@+id/btLoginSignUp"
-        app:layout_constraintStart_toStartOf="@+id/btLoginSignUp" />
+        app:layout_constraintBottom_toTopOf="@+id/btnLoginSignUp"
+        app:layout_constraintEnd_toEndOf="@+id/btnLoginSignUp"
+        app:layout_constraintStart_toStartOf="@+id/btnLoginSignUp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btLoginSignUp"
+        android:id="@+id/btnLoginSignUp"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,8 +82,8 @@
         android:text="@string/button_sign_up"
         android:textColor="@color/dark_gray"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btLoginSignIn"
-        app:layout_constraintStart_toStartOf="@+id/btLoginSignIn"
+        app:layout_constraintEnd_toEndOf="@+id/btnLoginSignIn"
+        app:layout_constraintStart_toStartOf="@+id/btnLoginSignIn"
         app:strokeColor="@color/dark_gray" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

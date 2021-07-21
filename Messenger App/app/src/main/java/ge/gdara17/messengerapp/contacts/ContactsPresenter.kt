@@ -4,7 +4,7 @@ import ge.gdara17.messengerapp.dataclasses.User
 
 class ContactsPresenter(private val view: ContactsContract.View) :
     ContactsContract.Presenter {
-    private val model = ContactsModel(this)
+    private val model : ContactsContract.Model = ContactsModel(this)
 
     override fun getContacts() {
         model.fetchContacts()
