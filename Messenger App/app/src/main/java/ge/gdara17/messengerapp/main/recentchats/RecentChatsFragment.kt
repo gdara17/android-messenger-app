@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import ge.gdara17.messengerapp.chat.ChatActivity
 import ge.gdara17.messengerapp.databinding.FragmentRecentChatsBinding
@@ -30,8 +31,14 @@ class RecentChatsFragment : Fragment(), RecentChatClickListener, RecentChatsCont
         val view = binding.root
 
         initRecyclerView()
-
+        addListeners()
         return view
+    }
+
+    private fun addListeners() {
+        binding.etRecentChatsSearch.addTextChangedListener {
+            presenter.getRecentChats(it.toString())
+        }
     }
 
     private fun initRecyclerView() {

@@ -3,6 +3,7 @@ package ge.gdara17.messengerapp.contacts
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import ge.gdara17.messengerapp.chat.ChatActivity
 import ge.gdara17.messengerapp.databinding.ActivityContactsBinding
@@ -27,6 +28,9 @@ class ContactsActivity : AppCompatActivity(), ContactClickListener, ContactsCont
     private fun addListeners() {
         binding.btnContactsBack.setOnClickListener {
             finish()
+        }
+        binding.etContactsSearch.addTextChangedListener {
+            presenter.getContacts(it.toString())
         }
     }
 

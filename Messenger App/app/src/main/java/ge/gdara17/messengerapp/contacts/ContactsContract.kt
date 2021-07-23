@@ -11,12 +11,12 @@ interface ContactsContract {
 
     interface Model {
         fun addChat(chat: Chat)
-        fun fetchContacts()
+        fun fetchContacts(searchString: String? = null)
     }
 
     interface Presenter {
         fun addChat(chat: Chat)
-        fun getContacts()
+        fun getContacts(searchString: String? = null)
         fun onChatAdded(chat: Chat)
         fun onContactsFetched(contacts: MutableList<User>)
     }

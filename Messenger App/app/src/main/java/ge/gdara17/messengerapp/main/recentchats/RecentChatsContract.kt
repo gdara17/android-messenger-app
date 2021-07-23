@@ -8,10 +8,11 @@ interface RecentChatsContract {
     }
 
     interface Model {
-
+        fun fetchRecentChats(searchString: String? = null)
     }
 
     interface Presenter {
+        fun getRecentChats(searchString: String? = null)
         fun onRecentChatsFetched(recentChats: MutableList<Chat>)
     }
 }

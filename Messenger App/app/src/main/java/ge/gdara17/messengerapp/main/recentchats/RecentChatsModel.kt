@@ -11,9 +11,7 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import ge.gdara17.messengerapp.Constants
 import ge.gdara17.messengerapp.dataclasses.Chat
-import ge.gdara17.messengerapp.dataclasses.Message
 import ge.gdara17.messengerapp.dataclasses.User
-import java.util.*
 
 class RecentChatsModel(private val presenter: RecentChatsContract.Presenter) :
     RecentChatsContract.Model {
@@ -38,32 +36,46 @@ class RecentChatsModel(private val presenter: RecentChatsContract.Presenter) :
         })
     }
 
-    fun fetchRecentChats() {
+    override fun fetchRecentChats(searchString: String?) {
         usersRef.child(auth.currentUser?.uid!!).get().addOnSuccessListener { userSnapshot ->
             val currentUser = userSnapshot.getValue<User>()
             Log.d(Constants.DEBUG_TAG, "current user fetch:success, $currentUser")
             currentUser?.chats?.let {
-                fetchUsersWithChats(it)
+                fetchUsersWithChats(it, searchString)
             }
         }.addOnFailureListener {
             Log.d(Constants.DEBUG_TAG, "current user fetch:failure", it)
         }
     }
 
-    private fun fetchUsersWithChats(userToChat: Map<String, String>) {
+    private fun fetchUsersWithChats(userToChat: Map<String, String>, searchString: String?) {
         val chatToUser = userToChat.entries.associate { (k, v) -> v to k }
-        val chatUids = userToChat.values.toList()
         val userUids = userToChat.keys.toList()
 
         usersRef.get().addOnSuccessListener { usersSnapshot ->
-            val users = usersSnapshot.getValue<Map<String, User>>()?.filter { (key, _) ->
+            var users = usersSnapshot.getValue<Map<String, User>>()?.filter { (key, user) ->
                 key in userUids
             }?.onEach { (uid, user) ->
                 user.uid = uid
             }
+
+            users = users?.filter { (_, user) ->
+                if (searchString.isNullOrBlank()) {
+                    return@filter true
+                } else {
+                    val username = user.username
+                    if (username.isNullOrBlank()) {
+                        return@filter false
+                    } else {
+                        return@filter username.contains(searchString)
+                    }
+                }
+            }
+
             Log.d(Constants.DEBUG_TAG, "chat users fetch:success, $users")
 
             users?.let {
+                val chatUids = it.map { (key, _) -> userToChat[key]!! }
                 fetchChatsForUsers(chatUids, it, chatToUser)
             }
         }.addOnFailureListener {

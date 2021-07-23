@@ -37,10 +37,23 @@ class ContactsModel(private val presenter: ContactsContract.Presenter) : Contact
         }
     }
 
-    override fun fetchContacts() {
+    override fun fetchContacts(searchString: String?) {
         usersRef.get().addOnSuccessListener { dataSnapshot ->
             Log.d(Constants.DEBUG_TAG, "Users fetched successfully")
-            val users = dataSnapshot.getValue<MutableMap<String, User>>()
+            var users = dataSnapshot.getValue<MutableMap<String, User>>()
+            users = users?.filter { (_, user) ->
+                if (searchString.isNullOrBlank()) {
+                    return@filter true
+                } else {
+                    val username = user.username
+                    if (username.isNullOrBlank()) {
+                        return@filter false
+                    } else {
+                        return@filter username.contains(searchString)
+                    }
+                }
+            } as MutableMap<String, User>?
+
             users?.apply {
                 remove(auth.currentUser?.uid)
                 forEach { (key, user) ->

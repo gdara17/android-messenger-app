@@ -11,8 +11,8 @@ class ContactsPresenter(private val view: ContactsContract.View) :
         model.addChat(chat)
     }
 
-    override fun getContacts() {
-        model.fetchContacts()
+    override fun getContacts(searchString: String?) {
+        model.fetchContacts(searchString)
     }
 
     override fun onChatAdded(chat: Chat) {
