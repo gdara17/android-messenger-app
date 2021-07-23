@@ -1,6 +1,7 @@
 package ge.gdara17.messengerapp.dataclasses
 
 import android.os.Parcelable
+import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
@@ -10,23 +11,29 @@ import java.util.*
 @IgnoreExtraProperties
 @Parcelize
 class Message(
-//    val from: User? = null,
-//    val to: User? = null,
-    val time: Long? = Calendar.getInstance().timeInMillis,
+    @get:Exclude
+    var chatUid: String? = null,
+    @get:Exclude
+    var received: Boolean? = true,
+    var sender: String? = null,
+    val timestamp: Long? = Calendar.getInstance().timeInMillis,
     val text: String? = null,
-    val received: Boolean? = true
 ) : Parcelable {
+
+
     @IgnoredOnParcel
     private val formatter = SimpleDateFormat("hh:mm")
 
+    @Exclude
     fun getTimeAsCalendar(): Calendar {
         val calendar = Calendar.getInstance()
-        calendar.timeInMillis = time!!
+        calendar.timeInMillis = timestamp!!
 
         return calendar
     }
 
+    @Exclude
     fun getFormattedTime(): String {
-        return formatter.format(time)
+        return formatter.format(timestamp)
     }
 }

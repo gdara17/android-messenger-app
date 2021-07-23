@@ -1,10 +1,56 @@
 package ge.gdara17.messengerapp.contacts
 
+import android.util.Log
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
+import ge.gdara17.messengerapp.Constants
+import ge.gdara17.messengerapp.dataclasses.Chat
 import ge.gdara17.messengerapp.dataclasses.User
 
 class ContactsModel(private val presenter: ContactsContract.Presenter) : ContactsContract.Model {
+    private val auth = Firebase.auth
+    private val database = Firebase.database
+    private val usersRef = database.getReference("users")
+    private val chatsRef = database.getReference("chats")
+
+    override fun addChat(chat: Chat) {
+        if (chat.with == null) {
+            return
+        }
+
+        val chatKey = chatsRef.push().key
+        if (chatKey == null) {
+            Log.d(Constants.DEBUG_TAG, "could not add chat")
+            return
+        }
+
+        val childUpdates = hashMapOf<String, Any>(
+            "${chat.with!!.uid!!}/chats/${auth.currentUser!!.uid}" to chatKey,
+            "${auth.currentUser!!.uid}/chats/${chat.with!!.uid!!}" to chatKey
+        )
+
+        usersRef.updateChildren(childUpdates).addOnSuccessListener {
+            chat.uid = chatKey
+            presenter.onChatAdded(chat)
+        }
+    }
+
     override fun fetchContacts() {
-        presenter.onContactsFetched(getDummyContacts())
+        usersRef.get().addOnSuccessListener { dataSnapshot ->
+            Log.d(Constants.DEBUG_TAG, "Users fetched successfully")
+            val users = dataSnapshot.getValue<MutableMap<String, User>>()
+            users?.apply {
+                remove(auth.currentUser?.uid)
+                forEach { (key, user) ->
+                    user.uid = key
+                }
+                values.toMutableList().let {
+                    presenter.onContactsFetched(it)
+                }
+            }
+        }
     }
 
     private fun getDummyContacts(): MutableList<User> {

@@ -5,12 +5,13 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import ge.gdara17.messengerapp.databinding.ActivityChatBinding
 import ge.gdara17.messengerapp.dataclasses.Chat
+import ge.gdara17.messengerapp.dataclasses.Message
 
 class ChatActivity : AppCompatActivity(), ChatContract.View {
     private lateinit var binding: ActivityChatBinding
     private lateinit var adapter: MessagesAdapter
     private lateinit var chat: Chat
-    private val presenter: ChatContract.Presenter = ChatPresenter(this)
+    private lateinit var presenter: ChatContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +19,7 @@ class ChatActivity : AppCompatActivity(), ChatContract.View {
         setContentView(binding.root)
 
         chat = intent.getParcelableExtra(CHAT_EXTRA)!!
+        presenter = ChatPresenter(this, chat.uid!!)
         initViews()
         initRecyclerView()
         addListeners()
@@ -27,10 +29,23 @@ class ChatActivity : AppCompatActivity(), ChatContract.View {
         binding.chatToolbar.setNavigationOnClickListener {
             finish()
         }
+
+        binding.btnChatSend.setOnClickListener {
+            val messageText = binding.etChatMessage.text.toString()
+            binding.etChatMessage.setText("")
+            if (messageText.isEmpty()) {
+                return@setOnClickListener
+            }
+            val message = Message(
+                chatUid = chat.uid!!,
+                text = messageText
+            )
+            presenter.sendMessage(message)
+        }
     }
 
     private fun initViews() {
-        binding.tvChatPerson.text = chat.with?.name
+        binding.tvChatPerson.text = chat.with?.username
         binding.tvChatOccupation.text = chat.with?.occupation
         // TODO: avatar
     }
@@ -50,5 +65,9 @@ class ChatActivity : AppCompatActivity(), ChatContract.View {
     override fun showChat(chat: Chat) {
         this.chat = chat
         adapter.submitList(chat.messages ?: mutableListOf())
+    }
+
+    override fun showMessages(message: MutableList<Message>) {
+        adapter.submitList(message)
     }
 }

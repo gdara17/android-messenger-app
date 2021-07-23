@@ -7,6 +7,7 @@ import android.widget.Toast
 import ge.gdara17.messengerapp.R
 import ge.gdara17.messengerapp.databinding.ActivityLoginBinding
 import ge.gdara17.messengerapp.databinding.ActivitySignUpBinding
+import ge.gdara17.messengerapp.dataclasses.User
 import ge.gdara17.messengerapp.main.MainActivity
 
 class SignUpActivity : AppCompatActivity(), LogInContract.View {
@@ -24,9 +25,15 @@ class SignUpActivity : AppCompatActivity(), LogInContract.View {
     private fun addListeners() {
         binding.btnSignUpSignUp.setOnClickListener {
             val username = binding.etSignUpNickname.text.toString()
+            val occupation = binding.etSignUpOccupation.text.toString()
             val password = binding.etSignUpPassword.text.toString()
 
-            presenter.createUser(username, password)
+            val user = User(
+                username = username,
+                occupation = occupation
+            )
+
+            presenter.createUser(user, password)
         }
     }
 

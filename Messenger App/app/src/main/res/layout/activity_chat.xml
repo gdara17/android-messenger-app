@@ -10,6 +10,7 @@
         android:id="@+id/rvChatMessages"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/chat_action_bar_size"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/sent_message_cell" />
 
@@ -79,7 +80,7 @@
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBarChat"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/chat_action_bar_size"
         android:layout_gravity="bottom">
 
         <androidx.constraintlayout.widget.ConstraintLayout

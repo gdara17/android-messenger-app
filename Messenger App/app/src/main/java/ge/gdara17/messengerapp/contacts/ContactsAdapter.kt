@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ge.gdara17.messengerapp.databinding.ContactCellBinding
-import ge.gdara17.messengerapp.dataclasses.Chat
 import ge.gdara17.messengerapp.dataclasses.User
 
 class ContactsAdapter(private val listener: ContactClickListener) :
@@ -41,7 +40,7 @@ class ContactsAdapter(private val listener: ContactClickListener) :
     ) : RecyclerView.ViewHolder(binding.root) {
         fun configure(contact: User) {
             // TODO: avatar
-            binding.tvContactName.text = contact.name
+            binding.tvContactName.text = contact.username
             binding.tvContactOccupation.text = contact.occupation
 
             addClickListeners()

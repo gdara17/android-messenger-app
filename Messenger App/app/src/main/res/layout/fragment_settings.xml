@@ -42,7 +42,7 @@
         android:background="@drawable/textview_background"
         android:ems="12"
         android:hint="@string/hint_edittext_what_i_do"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
         android:textAlignment="center"

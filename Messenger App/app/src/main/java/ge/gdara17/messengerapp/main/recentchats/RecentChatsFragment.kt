@@ -30,7 +30,6 @@ class RecentChatsFragment : Fragment(), RecentChatClickListener, RecentChatsCont
         val view = binding.root
 
         initRecyclerView()
-        presenter.getRecentChats()
 
         return view
     }

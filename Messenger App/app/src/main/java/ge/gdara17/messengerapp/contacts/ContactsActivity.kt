@@ -39,14 +39,21 @@ class ContactsActivity : AppCompatActivity(), ContactClickListener, ContactsCont
     }
 
     override fun onContactClick(position: Int) {
-        val i = Intent(this, ChatActivity::class.java)
         val user = adapter.getAt(position)
-        val chat = Chat(user, messages = mutableListOf())
-        i.putExtra(ChatActivity.CHAT_EXTRA, chat)
-        startActivity(i)
+        val chat = Chat(
+            with = user,
+            messages = mutableListOf()
+        )
+        presenter.addChat(chat)
     }
 
     override fun showContacts(contacts: MutableList<User>) {
         adapter.submitList(contacts)
+    }
+
+    override fun onChatAdded(chat: Chat) {
+        val i = Intent(this, ChatActivity::class.java)
+        i.putExtra(ChatActivity.CHAT_EXTRA, chat)
+        startActivity(i)
     }
 }

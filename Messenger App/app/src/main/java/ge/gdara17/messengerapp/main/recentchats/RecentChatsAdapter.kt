@@ -43,9 +43,9 @@ class RecentChatsAdapter(private val listener: RecentChatClickListener) :
         fun configureWith(chat: Chat) {
 
             // TODO: avatar
-            binding.tvRecentChatPerson.text = chat.with?.name
-            binding.tvRecentChatMessage.text = chat.messages?.last()?.text
-            binding.tvRecentChatTime.text = chat.messages?.last()?.getFormattedTime()
+            binding.tvRecentChatPerson.text = chat.with?.username
+            binding.tvRecentChatMessage.text = chat.lastMessage?.text
+            binding.tvRecentChatTime.text = chat.lastMessage?.getFormattedTime()
 
             addClickListeners()
         }

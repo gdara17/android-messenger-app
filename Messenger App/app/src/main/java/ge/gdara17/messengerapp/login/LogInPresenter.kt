@@ -1,5 +1,7 @@
 package ge.gdara17.messengerapp.login
 
+import ge.gdara17.messengerapp.dataclasses.User
+
 
 class LogInPresenter(private val view: LogInContract.View) :
     LogInContract.Presenter {
@@ -13,8 +15,8 @@ class LogInPresenter(private val view: LogInContract.View) :
         model.validateUser(username, password)
     }
 
-    override fun createUser(username: String, password: String) {
-        model.createUser(username, password)
+    override fun createUser(user: User, password: String) {
+        model.createUser(user, password)
     }
 
     override fun onUserValidated(isValid: Boolean) {

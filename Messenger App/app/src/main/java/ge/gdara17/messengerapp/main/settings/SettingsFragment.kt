@@ -24,11 +24,12 @@ class SettingsFragment : Fragment(), SettingsContract.View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        initViews()
+        addListeners()
+        presenter.getUser()
         return view
     }
 
-    private fun initViews() {
+    private fun addListeners() {
         binding.btnSettingsUpdate.setOnClickListener {
             val username = binding.etSettingsNickname.text.toString()
             val occupation = binding.etSettingsOccupation.text.toString()
@@ -44,6 +45,11 @@ class SettingsFragment : Fragment(), SettingsContract.View {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun showUser(user: User) {
+        binding.etSettingsNickname.setText(user.username)
+        binding.etSettingsOccupation.setText(user.occupation)
     }
 
     override fun onSettingsUpdateSuccess() {
